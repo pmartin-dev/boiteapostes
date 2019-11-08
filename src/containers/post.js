@@ -5,6 +5,7 @@ class Post extends Component {
   render() {
     return (
       <div>
+        <p>Post n°{this.props.match.params.id}</p>
         <PostContent />
       </div>
     );
