@@ -6,11 +6,18 @@ import "./index.css";
 import rootReducer from "./reducers";
 import * as serviceWorker from "./serviceWorker";
 import Routes from "./routes";
+import thunk from "redux-thunk";
 
-const createStoreWithMiddleWare = applyMiddleware()(createStore);
+const createStoreWithMiddleWare = applyMiddleware(thunk)(createStore);
 
 ReactDOM.render(
-  <Provider store={createStoreWithMiddleWare(rootReducer)}>
+  <Provider
+    store={createStoreWithMiddleWare(
+      rootReducer,
+      window.__REDUX_DEVTOOLS_EXTENSION__ &&
+        window.__REDUX_DEVTOOLS_EXTENSION__()
+    )}
+  >
     <Routes />
   </Provider>,
 
