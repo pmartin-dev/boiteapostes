@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { readAllPost } from "../actions/index";
+import { readAllPost, deletePost } from "../actions/index";
 import PostListItem from "../components/post-list-item";
 
 class PostList extends Component {
@@ -10,15 +10,27 @@ class PostList extends Component {
 
   renderPosts() {
     const { posts } = this.props;
+    console.log(posts);
     if (posts.length !== 0) {
+      console.log(posts);
       return posts.map(post => {
-        return <PostListItem key={post.id} post={post} />;
+        return (
+          <PostListItem
+            key={post.id}
+            post={post}
+            deletePostCallBack={() => this.deletePostCallBack(post)}
+          />
+        );
       });
     }
   }
 
+  deletePostCallBack(post) {
+    console.log(post);
+    this.props.deletePost(post.id);
+  }
+
   render() {
-    console.log(this.props.posts);
     return (
       <div>
         <h1>Liste de postes</h1>
@@ -42,7 +54,7 @@ const mapStateToProps = store => {
   };
 };
 
-const mapDispatchToProps = { readAllPost };
+const mapDispatchToProps = { readAllPost, deletePost };
 
 export default connect(
   mapStateToProps,
