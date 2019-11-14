@@ -27,7 +27,7 @@ export function deletePost(id) {
   };
 }
 
-export function createPOSTS(post) {
+export function createPost(post) {
   return function(dispatch) {
     axios
       .post(`${END_POINT}/posts`, {

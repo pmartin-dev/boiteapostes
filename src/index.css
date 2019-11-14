@@ -34,3 +34,7 @@ code {
   font-size: 18px;
   margin-bottom: 20px;
 }
+
+.button_space {
+  padding-right: 30px;
+}
