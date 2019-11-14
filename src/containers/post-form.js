@@ -7,7 +7,8 @@ import { connect } from "react-redux";
 const formConfig = {
   form: "createPostForm",
   fields: ["title", "content", "author"],
-  validate: validate
+  validate: validate,
+  initialValues: { author: "Moi" }
 };
 
 function validate(values) {

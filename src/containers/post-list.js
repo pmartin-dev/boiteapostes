@@ -6,16 +6,27 @@ import ReactCSSTransitionGroup from "react-addons-css-transition-group";
 import { Link } from "react-router-dom";
 
 class PostList extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { displayOnlyMines: false };
+  }
+
   UNSAFE_componentWillMount() {
     this.props.readAllPost();
   }
 
   renderPosts() {
     const { posts } = this.props;
+    let arrayPosts;
     console.log(posts);
     if (posts.length !== 0) {
-      console.log(posts);
-      return posts.map(post => {
+      if (this.state.displayOnlyMines) {
+        arrayPosts = this.filterMyPosts(posts);
+      } else {
+        arrayPosts = posts;
+      }
+
+      return arrayPosts.map(post => {
         return (
           <PostListItem
             key={post.id}
@@ -32,6 +43,16 @@ class PostList extends Component {
     this.props.deletePost(post.id);
   }
 
+  filterMyPosts(postList) {
+    return postList.filter(post => {
+      if (post.author === "Moi") {
+        return true;
+      } else {
+        return false;
+      }
+    });
+  }
+
   render() {
     return (
       <div>
@@ -43,6 +64,11 @@ class PostList extends Component {
             </button>
           </Link>
         </div>
+        <input
+          type="checkbox"
+          onChange={e => this.setState({ displayOnlyMines: e.target.checked })}
+        />
+        Afficher uniquement mes posts
         <table className="table table-hover">
           <thead>
             <tr>
