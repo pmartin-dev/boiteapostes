@@ -14,3 +14,23 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+.fade-enter {
+  opacity: 0.01;
+}
+
+.fade-enter.fade-enter-active {
+  opacity: 1;
+  transition: opacity 500ms ease-in;
+}
+
+.fade-leave.fade-leave-active {
+  transform: translate(-1000%);
+  transition: transform 3000ms ease-out;
+}
+
+.btn-circle.btn-lg {
+  border-radius: 10px;
+  font-size: 18px;
+  margin-bottom: 20px;
+}

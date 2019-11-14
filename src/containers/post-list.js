@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { readAllPost, deletePost } from "../actions/index";
 import PostListItem from "../components/post-list-item";
+import ReactCSSTransitionGroup from "react-addons-css-transition-group";
+import { Link } from "react-router-dom";
 
 class PostList extends Component {
   UNSAFE_componentWillMount() {
@@ -34,6 +36,13 @@ class PostList extends Component {
     return (
       <div>
         <h1>Liste de postes</h1>
+        <div className="button_add">
+          <Link to={"create-post"}>
+            <button className="btn btn-primary btn-circle btn-lg">
+              Ajouter un poste
+            </button>
+          </Link>
+        </div>
         <table className="table table-hover">
           <thead>
             <tr>
@@ -41,7 +50,14 @@ class PostList extends Component {
               <th>Action</th>
             </tr>
           </thead>
-          <tbody>{this.renderPosts()}</tbody>
+          <ReactCSSTransitionGroup
+            component="tbody"
+            transitionEnterTimeout={500}
+            transitionLeaveTimeout={300}
+            transitionName="fade"
+          >
+            {this.renderPosts()}
+          </ReactCSSTransitionGroup>
         </table>
       </div>
     );
