@@ -38,3 +38,7 @@ code {
 .button_space {
   padding-right: 30px;
 }
+
+.has-danger {
+  color: red;
+}
